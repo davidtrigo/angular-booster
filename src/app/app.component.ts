@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
@@ -56,24 +57,21 @@ export class AppComponent {
     net:'1961-02-16T13:05:00Z',
     numberOfLaunches:'20',
   };
-  launches= [{
-    name:'Apollo 13',
-    location:'Kennedy Space Center',
-    net:'1961-02-16T13:05:00Z',
-    pad:'39A',
-    status:
-    {
-      name:'Success'
+    launches= [];
+
+  /*
+  http: HttpClient;
+  constructor( http:HttpClient){
+    this.http = http;
+  }*/
+
+  // Sugar Syntax
+ constructor(private http:HttpClient){}
+   
+  getSpaceData(){
+    const launchesUrl='https://lldev.thespacedevs.com/2.0.0/launch/?mode=list&';
+      this.http.get(launchesUrl)
     }
-  },
-  {
-    name:'Apollo 13 mission 2',
-    net:'1964-02-17T13:05:00Z',
-    location:'Kennedy Space Center',
-    pad:'40A',
-    status:{
-      name:'Failure'
-    }
-  }
-];
+  
+
 }
