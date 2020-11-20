@@ -19,6 +19,19 @@ import { Component } from '@angular/core';
       </div>
     <button type="submit" >Go !</button>
     </form>
+
+    <aside *ngFor="let launch of launches">
+    <h3>
+      {{ launches.name }}
+    </h3>
+    <p>
+      <b>on {{ launch.net | date: 'dd/MM/yyyy HH:mm:ss' }}</b>
+    </p>
+    <p>
+      <i> at {{ launch.location }}</i>
+    </p>
+    <i> pad: {{ launch.pad }}</i>
+  </aside>
   `,
   styles: [
     `
@@ -32,6 +45,20 @@ export class AppComponent {
   title = 'angular-booster';
   queryParams={
     searchTerm:'Apollo',
+    net:'1961-02-16T13:05:00Z',
     numberOfLaunches:'20',
+  };
+  launches= [{
+    name:'Apollo 13',
+    location:'Kennedy Space Center',
+    net:'1961-02-16T13:05:00Z',
+    pad:'39A'
+  },
+  {
+    name:'Apollo 13 mission 2',
+    net:'1964-02-17T13:05:00Z',
+    location:'Kennedy Space Center',
+    pad:'40A'
   }
+];
 }
