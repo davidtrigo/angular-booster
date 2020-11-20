@@ -18,7 +18,8 @@ import { Component } from '@angular/core';
         <label for="numberOfLaunches">Number of launches </label>
         <input name="numberOfLaunches" type="number" [(ngModel)] ="queryParams.numberOfLaunches"/>
       </div>
-    <button type="submit" >Go !</button>
+    
+    <button type="submit" (click)="getSpaceData()">Go !</button>
     </form>
 
     <aside *ngFor="let launch of launches" class="{{ launch.status.name | lowercase }}">
@@ -54,7 +55,6 @@ export class AppComponent {
   title = 'angular-booster';
   queryParams={
     searchTerm:'Apollo',
-    net:'1961-02-16T13:05:00Z',
     numberOfLaunches:'20',
   };
     launches= [];
@@ -69,8 +69,10 @@ export class AppComponent {
  constructor(private http:HttpClient){}
    
   getSpaceData(){
-    const launchesUrl='https://lldev.thespacedevs.com/2.0.0/launch/?mode=list&';
-      this.http.get(launchesUrl)
+    
+    const launchesUrl = `https://lldev.thespacedevs.com/2.0.0/launch/?mode=list&limit=${this.queryParams.numberOfLaunches}
+    &search=${this.queryParams.searchTerm}`;
+      this.http.get(launchesUrl).subscribe();
     }
   
 
