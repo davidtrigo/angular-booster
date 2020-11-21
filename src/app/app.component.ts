@@ -21,8 +21,11 @@ import { Component } from '@angular/core';
     
     <button type="submit" (click)="getSpaceData()">Go !</button>
     </form>
-
-    <aside *ngFor="let launch of launches" class="{{ launch.status.name | lowercase }}">
+    <section *ngIf="launches.length > 0">
+    <header>
+        <h2>Found {{ launches.length }} launches</h2>
+      </header>
+      <aside *ngFor="let launch of launches" class="{{ launch.status.name | lowercase }}">
     <h3>
       {{ launch.name }}
     </h3>
@@ -35,6 +38,13 @@ import { Component } from '@angular/core';
     <i> pad: {{ launch.pad }}</i>
     
   </aside>
+    </section>
+    <aside *ngIf="launches.length == 0">
+      <header>
+        <h4>📡 Waiting... No data yet 📡</h4>
+      </header>
+    </aside>
+    
   `,
   styles: [
     `
