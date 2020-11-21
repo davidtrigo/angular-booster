@@ -58,7 +58,7 @@ export class AppComponent {
     numberOfLaunches:'20',
   };
     launches= [];
-
+   // launches: any[]=[];
   /*
   http: HttpClient;
   constructor( http:HttpClient){
@@ -72,7 +72,9 @@ export class AppComponent {
     
     const launchesUrl = `https://lldev.thespacedevs.com/2.0.0/launch/?mode=list&limit=${this.queryParams.numberOfLaunches}
     &search=${this.queryParams.searchTerm}`;
-      this.http.get(launchesUrl).subscribe();
+      this.http.get<any>(launchesUrl).subscribe({
+        next: data => (this.launches = data.results),
+      });
     }
   
 
