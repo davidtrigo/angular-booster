@@ -79,8 +79,8 @@ export class AppComponent {
  constructor(private http:HttpClient){}
    
   getSpaceData(){
-    
-    const launchesUrl = `https://lldev.thespacedevs.com/2.0.0/launch/?mode=list&limit=${this.queryParams.numberOfLaunches}
+    const rootUrl = 'https://lldev.thespacedevs.com/2.0.0/launch/?mode=list&';
+    const launchesUrl = `${rootUrl}limit=${this.queryParams.numberOfLaunches}
     &search=${this.queryParams.searchTerm}`;
       this.http.get<any>(launchesUrl).subscribe({
         next: data => (this.launches = data.results),
