@@ -7,3 +7,7 @@ app.use(express.static(__dirname+'/dist/ng-booster'));
 app.get('/',function(req,res){
     res.sendFile(path.join(__dirname+'/dist/ng-booster/index.html'));
 });
+
+app.listen(process.env.PORT || 8080);
+
+
