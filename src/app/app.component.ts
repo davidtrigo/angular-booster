@@ -1,3 +1,4 @@
+import { Launch } from './launch';
 import { QueryParams } from './query-params';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
@@ -49,6 +50,13 @@ import { Component } from '@angular/core';
         <h4>📡 Waiting... No data yet 📡</h4>
       </header>
     </aside>
+
+    <aside *ngIf="weHaveAproblem !== ''">
+      <header>
+        <h3>💫 Houston, we have a problem! 💫</h3>
+        <h5>{{ weHaveAproblem | json }}</h5>
+      </header>
+    </aside>
     
   `,
   styles: [
@@ -72,17 +80,9 @@ export class AppComponent {
     searchTerm:'Apollo',
     numberOfLaunches:20,
   };
-  
-    launches= [];
+   launches: Launch[] = [];
     weHaveAproblem= '';
-   // launches: any[]=[];
-  /*
-  http: HttpClient;
-  constructor( http:HttpClient){
-    this.http = http;
-  }*/
 
-  // Sugar Syntax
  constructor(private http:HttpClient){}
    
   getSpaceData(){
@@ -91,6 +91,7 @@ export class AppComponent {
       
     this.http.get<any>(launchesUrl).subscribe({
         next: data => (this.launches = data.results),  //ok
+       error: err=> (this.weHaveAproblem= err.detail)  //fail
       });
     }
   
