@@ -3,6 +3,7 @@ import { Launch } from './launch';
 import { QueryParams } from './query-params';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -87,8 +88,7 @@ export class AppComponent {
  constructor(private http:HttpClient){}
    
   getSpaceData(){
-    const rootUrl = 'https://lldev.thespacedevs.com/2.0.0/launch/?mode=list&';
-    const launchesUrl = `${rootUrl}limit=${this.queryParams.numberOfLaunches}&search=${this.queryParams.searchTerm}`;
+    const launchesUrl = `${environment.rootUrl}limit=${this.queryParams.numberOfLaunches}&search=${this.queryParams.searchTerm}`;
       
     this.http.get<ApiResult>(launchesUrl).subscribe({
         next: data => (this.launches = data.results),  //ok
