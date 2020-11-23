@@ -1,3 +1,4 @@
+import { ApiResult } from './api-results';
 import { Launch } from './launch';
 import { QueryParams } from './query-params';
 import { HttpClient } from '@angular/common/http';
@@ -89,7 +90,7 @@ export class AppComponent {
     const rootUrl = 'https://lldev.thespacedevs.com/2.0.0/launch/?mode=list&';
     const launchesUrl = `${rootUrl}limit=${this.queryParams.numberOfLaunches}&search=${this.queryParams.searchTerm}`;
       
-    this.http.get<any>(launchesUrl).subscribe({
+    this.http.get<ApiResult>(launchesUrl).subscribe({
         next: data => (this.launches = data.results),  //ok
        error: err=> (this.weHaveAproblem= err.detail)  //fail
       });
